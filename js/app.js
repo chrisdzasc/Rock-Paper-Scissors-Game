@@ -1,3 +1,5 @@
+
+/* Get the computer choice */
 function getComputerChoice() {
     const computerChoice = Math.random();
 
@@ -10,4 +12,12 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice());
+/* Get the human choice */
+function getHumanChoice() {
+
+    // Ask the user his choice and save it in a variable
+    const humanChoice = prompt('Rock, Paper or Scissors?');
+
+    // Return his choice
+    return humanChoice;
+}
