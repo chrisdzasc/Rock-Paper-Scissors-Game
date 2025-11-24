@@ -1,2 +1,39 @@
+/* Reset */
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: var(--stackNormal);
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 
 
+@font-face {
+    font-family: "Stack Sans Text", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/StackSansText-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Stack Sans Text", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/StackSansText-Regular.ttf');
+}
+
+/* VARIABLES */
+:root {
+    --twilightIndigo: #3D405B; 
+    --eggShell: #F4F1DE; 
+    --burntPeach: #E07A5F;
+    --mutedTeal: #81B29A;
+    --apricotCream: #F2CC8F;
+
+
+    --stackNormal: "Stack Sans Text", sans-serif;
+}
