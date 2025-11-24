@@ -3,67 +3,138 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+const div = document.querySelector("div");
+
+const newDiv = document.createElement("p");
+const score = document.createElement("p");
+const winner = document.createElement("p");
+const resetBtn = document.createElement("button");
+
+resetBtn.textContent = "Reset Game";
+
 /* Get the computer choice */
 function getComputerChoice() {
     const computerChoice = Math.random();
 
     if(computerChoice < 0.33) {
         return 'rock';
-    } else if (computerChoice < 0.66) {
+    }else if (computerChoice < 0.66) {
         return 'paper';
-    } else {
+    }else {
         return 'scissors';
     }
 }
 
-/* Get the human choice */
-function getHumanChoice() {
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
 
-    // Ask the user his choice and save it in a variable
-    const humanChoice = prompt('Rock, Paper or Scissors?');
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
 
-    // Return his choice
-    return humanChoice.toLowerCase();
+    newDiv.remove();
+    score.remove();
+    winner.remove();
+    resetBtn.remove();
+}
+
+function updateScore() {
+    score.textContent = `You ${humanScore} vs ${computerScore} Computer`;
+
+    div.appendChild(score);
+
+    if(humanScore === 5) {
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
+
+        winner.textContent = `Congratulations! You Win!`;
+        div.appendChild(winner);
+        div.appendChild(resetBtn);
+
+    }else if(computerScore === 5) {
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
+
+        winner.textContent = `Sorry! You lose!`;
+        div.appendChild(winner);
+        div.appendChild(resetBtn);
+    }
 }
 
 // To play 1 round
 function playRound(humanChoice, computerChoice) {
-    
+
+    humanSelection = humanChoice.target.id;
+    computerChoice = getComputerChoice();
+
+    if(newDiv) {
+        newDiv.remove();
+    }
+
     // If the userChoice is 'rock' and the cumputerChoice is 'scissors', user wins.
-    if(humanChoice === 'rock' && computerChoice === 'scissors') {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return humanScore += 1; // Add a point for the user.
-    } else if(humanChoice === 'scissors' && computerChoice === 'paper') { // If the userChoice is 'scissors' and the cumputerChoice is 'paper', user wins.
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return humanScore += 1; // Add a point for the user.
-    } else if(humanChoice === 'paper' && computerChoice === 'rock') { // If the userChoice is 'paper' and the cumputerChoice is 'rock', user wins.
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return humanScore += 1; // Add a point for the user.
-    } else if(humanChoice === computerChoice) { // If both select the same option, it is a draw.
-        console.log(`It's a draw! No one gets point.`);
-    } else { // Else, the user lose.
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
-        return computerScore += 1; // Add a point for the computer.
+    if(humanSelection === 'rock' && computerChoice === 'scissors') {
+
+        newDiv.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
+        div.appendChild(newDiv);
+
+        humanScore += 1; // Add a point for the user.
+
+        updateScore();
+
+        return;
+
+    }else if(humanSelection === 'scissors' && computerChoice === 'paper') { // If the userChoice is 'scissors' and the cumputerChoice is 'paper', user wins.
+
+        newDiv.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
+        div.appendChild(newDiv);
+        
+        humanScore += 1; // Add a point for the user.
+
+        updateScore();
+
+        return;
+
+    }else if(humanSelection === 'paper' && computerChoice === 'rock') { // If the userChoice is 'paper' and the cumputerChoice is 'rock', user wins.
+
+        newDiv.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
+        div.appendChild(newDiv);
+        
+        humanScore += 1; // Add a point for the user.
+
+        updateScore();
+
+        return;
+
+    }else if(humanSelection === computerChoice) { // If both select the same option, it is a draw.
+
+        newDiv.textContent = `It's a draw! No one gets point.`;
+        div.appendChild(newDiv);
+
+        updateScore();
+
+    }else { // Else, the user lose.
+
+        newDiv.textContent = `You lose! ${computerChoice} beats ${humanSelection}`;
+        div.appendChild(newDiv);
+
+        computerScore += 1; // Add a point for the computer.
+
+        updateScore();
+
+        return;
+
     }
 }
 
-/* To play the game */
-function playGame() {
+rock.addEventListener("click", playRound);
+paper.addEventListener("click", playRound);
+scissors.addEventListener("click", playRound);
 
-    // Call playRound() 5 times to play.
-    for(let i = 0; i < 5; i++ ) {
-        playRound(getHumanChoice(), getComputerChoice()); 
-    }
-
-    // Announce who wins.
-    if(humanScore > computerScore) {
-        console.log(`Final score: ${humanScore} - ${computerScore}. You win!`);
-    } else if(humanScore === computerScore) {
-        console.log(`Final score: ${humanScore} - ${computerScore}. It's a draw!`)
-    } else {
-        console.log(`Final score: ${humanScore} - ${computerScore}. You lose!`);
-    }
-}
-
-// Invoke the function to play.
-playGame();
+resetBtn.addEventListener("click", resetGame);
