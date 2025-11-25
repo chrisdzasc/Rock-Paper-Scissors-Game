@@ -11,6 +11,15 @@ body {
     box-sizing: inherit;
 }
 
+.btn {
+    border: none;
+    width: 160px;
+    height: 180px;
+    background-color: transparent;
+    background-size: 150px 150px;
+    background-repeat: no-repeat;
+}
+
 
 @font-face {
     font-family: "Stack Sans Text", sans-serif;
@@ -33,7 +42,128 @@ body {
     --burntPeach: #E07A5F;
     --mutedTeal: #81B29A;
     --apricotCream: #F2CC8F;
+    --charcoalBrown: #394032;
+    --brickEmber: #B80C09;
+    --fern: #3F784C;
 
 
     --stackNormal: "Stack Sans Text", sans-serif;
+}
+
+.header {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--twilightIndigo);
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 48px;
+    color: var(--burntPeach);
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--mutedTeal);
+}
+
+.results {
+    background-color: var(--eggShell);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.container {
+    background-color: var(--eggShell);
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 16rem;
+}
+
+.rock {
+    background-image: url("../img/rock.png");
+}
+
+.rock:hover {
+    cursor: pointer;
+}
+
+.paper {
+    background-image: url("../img/paper.png");
+}
+
+.paper:hover {
+    cursor: pointer;
+}
+
+.scissors {
+    background-image: url("../img/scissors.png");
+}
+
+.scissors:hover {
+    cursor: pointer;
+}
+
+.option {
+    text-align: center;
+    color: var(--twilightIndigo);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.footer {
+    background-color: var(--twilightIndigo);
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--apricotCream);
+}
+
+.result {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--fern);
+}
+
+.score {
+    font-size: 64px;
+    margin: 0;
+    color: var(--charcoalBrown);
+}
+
+.winner {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--brickEmber);
+}
+
+.reset {
+    border: none; 
+    background-color: #3D405B; 
+    border-radius: 16px; 
+    color: #F4F1DE; 
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    margin: 0;
+}
+
+.reset:hover {
+    cursor: pointer;
+}
+
+.containerAll {
+    padding: 16px;
 }

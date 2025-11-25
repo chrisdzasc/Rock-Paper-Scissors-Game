@@ -7,12 +7,17 @@ const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 
-const div = document.querySelector("div");
+const container = document.querySelector(".results");
 
-const newDiv = document.createElement("p");
+const result = document.createElement("p");
 const score = document.createElement("p");
 const winner = document.createElement("p");
 const resetBtn = document.createElement("button");
+
+result.classList.add("result");
+score.classList.add("score");
+winner.classList.add("winner");
+resetBtn.classList.add("reset");
 
 resetBtn.textContent = "Reset Game";
 
@@ -37,16 +42,16 @@ function resetGame() {
     paper.disabled = false;
     scissors.disabled = false;
 
-    newDiv.remove();
+    result.remove();
     score.remove();
     winner.remove();
     resetBtn.remove();
 }
 
 function updateScore() {
-    score.textContent = `You ${humanScore} vs ${computerScore} Computer`;
+    score.textContent = `You ${humanScore} - ${computerScore} Computer`;
 
-    div.appendChild(score);
+    container.appendChild(score);
 
     if(humanScore === 5) {
         rock.disabled = true;
@@ -54,8 +59,9 @@ function updateScore() {
         scissors.disabled = true;
 
         winner.textContent = `Congratulations! You Win!`;
-        div.appendChild(winner);
-        div.appendChild(resetBtn);
+        result.textContent = "";
+        container.appendChild(winner);
+        container.appendChild(resetBtn);
 
     }else if(computerScore === 5) {
         rock.disabled = true;
@@ -63,8 +69,9 @@ function updateScore() {
         scissors.disabled = true;
 
         winner.textContent = `Sorry! You lose!`;
-        div.appendChild(winner);
-        div.appendChild(resetBtn);
+        result.textContent = "";
+        container.appendChild(winner);
+        container.appendChild(resetBtn);
     }
 }
 
@@ -74,59 +81,69 @@ function playRound(humanChoice, computerChoice) {
     humanSelection = humanChoice.target.id;
     computerChoice = getComputerChoice();
 
-    if(newDiv) {
-        newDiv.remove();
+    if(result) {
+        result.remove();
     }
 
     // If the userChoice is 'rock' and the cumputerChoice is 'scissors', user wins.
     if(humanSelection === 'rock' && computerChoice === 'scissors') {
 
-        newDiv.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
-        div.appendChild(newDiv);
+        result.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
+        
 
         humanScore += 1; // Add a point for the user.
 
         updateScore();
+
+        container.appendChild(result);
 
         return;
 
     }else if(humanSelection === 'scissors' && computerChoice === 'paper') { // If the userChoice is 'scissors' and the cumputerChoice is 'paper', user wins.
 
-        newDiv.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
-        div.appendChild(newDiv);
+        result.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
+        
         
         humanScore += 1; // Add a point for the user.
 
         updateScore();
+
+        container.appendChild(result);
 
         return;
 
     }else if(humanSelection === 'paper' && computerChoice === 'rock') { // If the userChoice is 'paper' and the cumputerChoice is 'rock', user wins.
 
-        newDiv.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
-        div.appendChild(newDiv);
+        result.textContent = `You win! ${humanSelection} beats ${computerChoice}`;
+        
         
         humanScore += 1; // Add a point for the user.
 
         updateScore();
 
+        container.appendChild(result);
+
         return;
 
     }else if(humanSelection === computerChoice) { // If both select the same option, it is a draw.
 
-        newDiv.textContent = `It's a draw! No one gets point.`;
-        div.appendChild(newDiv);
+        result.textContent = `It's a draw! No one gets point.`;
+        
 
         updateScore();
 
+        container.appendChild(result);
+
     }else { // Else, the user lose.
 
-        newDiv.textContent = `You lose! ${computerChoice} beats ${humanSelection}`;
-        div.appendChild(newDiv);
+        result.textContent = `You lose! ${computerChoice} beats ${humanSelection}`;
+        
 
         computerScore += 1; // Add a point for the computer.
 
         updateScore();
+
+        container.appendChild(result);
 
         return;
 
